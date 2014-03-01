@@ -226,8 +226,12 @@ ghid_draw_grid (BoxType *drawn_area)
              gport->grid_color.green / 65535.,
              gport->grid_color.blue / 65535.);
 
+  glLineStipple (1, 0xAAAA);
+  glEnable (GL_LINE_STIPPLE);
+
   hidgl_draw_grid (drawn_area);
 
+  glDisable (GL_LINE_STIPPLE);
   glDisable (GL_COLOR_LOGIC_OP);
 }
 

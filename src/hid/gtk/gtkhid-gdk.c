@@ -142,10 +142,8 @@ set_clip (render_priv *priv, GdkGC *gc)
 static void
 ghid_draw_grid (void)
 {
-  static GdkPoint *points = 0;
-  static int npoints = 0;
   Coord x1, y1, x2, y2, x, y;
-  int n, i;
+  int i;
   render_priv *priv = gport->render_priv;
 
   if (Settings.GridStyle == GridStyle_None)
@@ -193,25 +191,13 @@ ghid_draw_grid (void)
     x2 -= PCB->Grid;
   if (Vy (y2) >= gport->height)
     y2 -= PCB->Grid;
-  n = (x2 - x1) / PCB->Grid + 1;
-  if (n > npoints)
-    {
-      npoints = n + 10;
-      points = (GdkPoint *)realloc (points, npoints * sizeof (GdkPoint));
-    }
-  n = 0;
   for (x = x1; x <= x2; x += PCB->Grid)
     {
-      points[n].x = Vx (x);
-      n++;
+      gdk_draw_line (gport->drawable, priv->grid_gc, Vx (x), 0, Vx (x), gport->height - 1);
     }
-  if (n == 0)
-    return;
   for (y = y1; y <= y2; y += PCB->Grid)
     {
-      for (i = 0; i < n; i++)
-	points[i].y = Vy (y);
-      gdk_draw_points (gport->drawable, priv->grid_gc, points, n);
+      gdk_draw_line (gport->drawable, priv->grid_gc, 0, Vy (y), gport->width - 1, Vy (y));
     }
 }
 

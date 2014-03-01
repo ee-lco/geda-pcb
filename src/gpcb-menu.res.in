@@ -121,7 +121,9 @@ MainMenu =
 # View Menu
 #
   {"View" m=V
-   {"Enable visible grid" checked=gridstyle,1 Display(Grid)}
+   {"Hide grid" checked=gridstyle,0 Display(HideGrid)}
+   {"Show dot grid" checked=gridstyle,1 Display(DotGrid)}
+   {"Show line grid" checked=gridstyle,2 Display(LineGrid)}
    {"Grid units"
     {"mil" checked=grid_units_mil,1 SetUnits(mil)}
     {"mm"  checked=grid_units_mm,1 SetUnits(mm)}

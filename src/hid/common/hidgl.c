@@ -142,7 +142,10 @@ hidgl_draw_grid (BoxType *drawn_area)
       y2 = tmp;
     }
 
-  n = (int) ((x2 - x1) / PCB->Grid + 0.5) + 1;
+  if (Settings.GridStyle == GridStyle_Line)
+    n = (int) ((x2 - x1) / PCB->Grid + 0.5 + (y2 - y1) / PCB->Grid + 0.5 ) * 2 + 1;
+  else
+    n = (int) ((x2 - x1) / PCB->Grid + 0.5) + 1;
   if (n > npoints)
     {
       npoints = n + 10;
@@ -153,17 +156,46 @@ hidgl_draw_grid (BoxType *drawn_area)
   glVertexPointer (3, GL_FLOAT, 0, points);
 
   n = 0;
-  for (x = x1; x <= x2; x += PCB->Grid)
+  if (Settings.GridStyle == GridStyle_Line)
     {
-      points[3 * n + 0] = x;
-      points[3 * n + 2] = global_depth;
-      n++;
+      for (x = x1; x < x2; x += PCB->Grid)
+	{
+	  points[3 * n + 0] = x;
+	  points[3 * n + 1] = 0;
+	  points[3 * n + 2] = global_depth;
+	  n++;
+	  points[3 * n + 0] = x;
+	  points[3 * n + 1] = PCB->MaxHeight;
+	  points[3 * n + 2] = global_depth;
+	  n++;
+	}
+      for (y = y1; y < y2; y += PCB->Grid)
+	{
+	  points[3 * n + 0] = 0;
+	  points[3 * n + 1] = y;
+	  points[3 * n + 2] = global_depth;
+	  n++;
+	  points[3 * n + 0] = PCB->MaxWidth;
+	  points[3 * n + 1] = y;
+	  points[3 * n + 2] = global_depth;
+	  n++;
+	}
+      glDrawArrays (GL_LINES, 0, n);
     }
-  for (y = y1; y <= y2; y += PCB->Grid)
+  else
     {
-      for (i = 0; i < n; i++)
-        points[3 * i + 1] = y;
-      glDrawArrays (GL_POINTS, 0, n);
+      for (x = x1; x <= x2; x += PCB->Grid)
+	{
+	  points[3 * n + 0] = x;
+	  points[3 * n + 2] = global_depth;
+	  n++;
+	}
+      for (y = y1; y <= y2; y += PCB->Grid)
+	{
+	  for (i = 0; i < n; i++)
+	    points[3 * i + 1] = y;
+	  glDrawArrays (GL_POINTS, 0, n);
+	}
     }
 
   glDisableClientState (GL_VERTEX_ARRAY);
