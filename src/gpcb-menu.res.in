@@ -241,7 +241,7 @@ MainMenu =
    {"Unselect all connected" Unselect(Connection)}
    -
    {"Select by name"
-    {"All objects" Select(ObjectByName) active=have_regex}
+    {"All objects" Select(ObjectByName) active=have_regex a={"Alt-N" "Alt<Key>n"}}
     {"Elements" Select(ElementByName) active=have_regex}
     {"Pads" Select(PadByName) active=have_regex}
     {"Pins" Select(PinByName) active=have_regex}
