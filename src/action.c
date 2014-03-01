@@ -114,6 +114,7 @@ typedef enum
   F_CycleClip,
   F_CycleCrosshair,
   F_DeleteRats,
+  F_DotGrid,
   F_Drag,
   F_DrillReport,
   F_Element,
@@ -125,12 +126,14 @@ typedef enum
   F_FlipElement,
   F_FoundPins,
   F_Grid,
+  F_HideGrid,
   F_InsertPoint,
   F_Layer,
   F_Layout,
   F_LayoutAs,
   F_LayoutToBuffer,
   F_Line,
+  F_LineGrid,
   F_LineSize,
   F_Lock,
   F_Mirror,
@@ -349,6 +352,7 @@ static FunctionType Functions[] = {
   {"CycleClip", F_CycleClip},
   {"CycleCrosshair", F_CycleCrosshair},
   {"DeleteRats", F_DeleteRats},
+  {"DotGrid", F_DotGrid},
   {"Drag", F_Drag},
   {"DrillReport", F_DrillReport},
   {"Element", F_Element},
@@ -360,12 +364,14 @@ static FunctionType Functions[] = {
   {"FlipElement", F_FlipElement},
   {"FoundPins", F_FoundPins},
   {"Grid", F_Grid},
+  {"HideGrid", F_HideGrid},
   {"InsertPoint", F_InsertPoint},
   {"Layer", F_Layer},
   {"Layout", F_Layout},
   {"LayoutAs", F_LayoutAs},
   {"LayoutToBuffer", F_LayoutToBuffer},
   {"Line", F_Line},
+  {"LineGrid", F_LineGrid},
   {"LineSize", F_LineSize},
   {"Lock", F_Lock},
   {"Mirror", F_Mirror},
@@ -2821,7 +2827,28 @@ ActionDisplay (int argc, char **argv, Coord childX, Coord childY)
 
 	  /* toggle displaying of the grid */
 	case F_Grid:
-	  Settings.DrawGrid = !Settings.DrawGrid;
+          if (Settings.GridStyle == GridStyle_None)
+            Settings.GridStyle = GridStyle_Dot;
+          else
+            Settings.GridStyle = GridStyle_None;
+	  Redraw ();
+	  break;
+
+	  /* hide grid */
+	case F_HideGrid:
+	  Settings.GridStyle = GridStyle_None;
+	  Redraw ();
+	  break;
+
+	  /* show dot grid */
+	case F_DotGrid:
+	  Settings.GridStyle = GridStyle_Dot;
+	  Redraw ();
+	  break;
+
+	  /* show line grid */
+	case F_LineGrid:
+	  Settings.GridStyle = GridStyle_Line;
 	  Redraw ();
 	  break;
 
@@ -2929,7 +2956,7 @@ ActionDisplay (int argc, char **argv, Coord childX, Coord childY)
 	    {
 	      PCB->GridOffsetX = GetValue (argv[1], NULL, NULL);
 	      PCB->GridOffsetY = GetValue (argv[2], NULL, NULL);
-	      if (Settings.DrawGrid)
+	      if (Settings.GridStyle != GridStyle_None)
 		Redraw ();
 	    }
 	  break;

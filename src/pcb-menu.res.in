@@ -92,7 +92,7 @@ MainMenu =
    {Grid
     {"mil" checked=grid_units_mil,1 SetUnits(mil)}
     {"mm"  checked=grid_units_mm,1 SetUnits(mm)}
-    {"Display grid" checked=drawgrid Display(Grid)}
+    {"Display grid" checked=gridstyle,1 Display(Grid)}
     {"Realign grid" GetXY(Click to set the grid origin) Display(ToggleGrid)}
     {"No Grid" checked=grid,0 SetValue(Grid,1)}
     -

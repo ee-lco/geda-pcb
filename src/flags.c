@@ -127,6 +127,12 @@ FlagMode (void *data)
 }
 
 static int
+FlagGridStyle (void *data)
+{
+  return Settings.GridStyle;
+}
+
+static int
 FlagHaveRegex (void *data)
 {
 #if defined(HAVE_REGCOMP) || defined(HAVE_RE_COMP)
@@ -256,7 +262,6 @@ HID_Flag flags_flag_list[] = {
   {"showsolderside",       FlagSETTINGS,     OFFSET_POINTER (SettingType, ShowBottomSide)},
   {"savelastcommand",      FlagSETTINGS,     OFFSET_POINTER (SettingType, SaveLastCommand)},
   {"saveintmp",            FlagSETTINGS,     OFFSET_POINTER (SettingType, SaveInTMP)},
-  {"drawgrid",             FlagSETTINGS,     OFFSET_POINTER (SettingType, DrawGrid)},
   {"ratwarn",              FlagSETTINGS,     OFFSET_POINTER (SettingType, RatWarn)},
   {"stipplepolygons",      FlagSETTINGS,     OFFSET_POINTER (SettingType, StipplePolygons)},
   {"alldirectionlines",    FlagSETTINGS,     OFFSET_POINTER (SettingType, AllDirectionLines)},
@@ -267,6 +272,8 @@ HID_Flag flags_flag_list[] = {
   {"ringbellwhenfinished", FlagSETTINGS,     OFFSET_POINTER (SettingType, RingBellWhenFinished)},
 
   {"buffer",               FlagBuffer,       NULL},
+
+  {"gridstyle",            FlagGridStyle,    NULL},
 
 };
 

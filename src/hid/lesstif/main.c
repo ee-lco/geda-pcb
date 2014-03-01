@@ -2293,7 +2293,7 @@ draw_grid ()
   int n;
   static GC grid_gc = 0;
 
-  if (!Settings.DrawGrid)
+  if (Settings.GridStyle == GridStyle_None)
     return;
   if (Vz (PCB->Grid) < MIN_GRID_DISTANCE)
     return;

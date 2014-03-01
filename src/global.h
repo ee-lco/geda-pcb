@@ -605,6 +605,13 @@ typedef struct
  * our resources
  * most of them are used as default when a new design is started
  */
+enum gridstyle
+{
+  GridStyle_None,
+  GridStyle_Dot,
+  GridStyle_Line
+};
+
 typedef struct			/* some resources... */
 {
   const Unit *grid_unit;
@@ -672,7 +679,6 @@ typedef struct			/* some resources... */
     SaveLastCommand,		/* save the last command entered by user */
     SaveInTMP,			/* always save data in /tmp */
     SaveMetricOnly,		/* save with mm suffix only, not mil/mm hybrid */
-    DrawGrid,			/* draw grid points */
     RatWarn,			/* rats nest has set warnings */
     StipplePolygons,		/* draw polygons with stipple */
     AllDirectionLines,		/* enable lines to all directions */
@@ -689,6 +695,7 @@ typedef struct			/* some resources... */
     /* connections is done */
     AutoPlace;			/* flag which says we should force placement of the
 				   windows on startup */
+  enum gridstyle GridStyle;	/* visible grid style */
 }
 SettingType;
 

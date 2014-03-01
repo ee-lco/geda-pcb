@@ -120,7 +120,7 @@ hidgl_draw_grid (BoxType *drawn_area)
   Coord x1, y1, x2, y2, n, i;
   double x, y;
 
-  if (!Settings.DrawGrid)
+  if (Settings.GridStyle == GridStyle_None)
     return;
 
   x1 = GridFit (MAX (0, drawn_area->X1), PCB->Grid, PCB->GridOffsetX);

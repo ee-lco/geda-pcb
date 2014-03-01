@@ -148,7 +148,7 @@ ghid_draw_grid (void)
   int n, i;
   render_priv *priv = gport->render_priv;
 
-  if (!Settings.DrawGrid)
+  if (Settings.GridStyle == GridStyle_None)
     return;
   if (Vz (PCB->Grid) < MIN_GRID_DISTANCE)
     return;

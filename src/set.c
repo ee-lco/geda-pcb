@@ -82,7 +82,7 @@ SetGrid (Coord Grid, bool align)
       if (grid_string)
         AttributePut (PCB, "PCB::grid::size", grid_string);
       g_free (grid_string);
-      if (Settings.DrawGrid)
+      if (Settings.GridStyle != GridStyle_None)
 	Redraw ();
     }
 }

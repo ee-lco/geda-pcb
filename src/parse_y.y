@@ -397,10 +397,7 @@ pcbgridnew
 				yyPCB->Grid = OU ($3);
 				yyPCB->GridOffsetX = OU ($4);
 				yyPCB->GridOffsetY = OU ($5);
-				if ($6)
-					Settings.DrawGrid = true;
-				else
-					Settings.DrawGrid = false;
+				Settings.GridStyle = $6;
 			}
 		;
 
@@ -410,10 +407,7 @@ pcbhigrid
 				yyPCB->Grid = NU ($3);
 				yyPCB->GridOffsetX = NU ($4);
 				yyPCB->GridOffsetY = NU ($5);
-				if ($6)
-					Settings.DrawGrid = true;
-				else
-					Settings.DrawGrid = false;
+				Settings.GridStyle = $6;
 			}
 		;
 

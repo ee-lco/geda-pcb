@@ -1434,12 +1434,13 @@ Vertical offset of the pin name display. Defaults to @code{-100mil}.
 
 /* %start-doc options "2 General GUI Options"
 @ftable @code
-@item --draw-grid
-If set, draw the grid at start-up.
+@item --grid-style <style>
+Visible grid style.
+Valid values are 0: no visible grid, 1: dot grid, 2: line grid.
 @end ftable
 %end-doc
 */
-  BSET (DrawGrid, 0, "draw-grid", "If set, draw the grid at start-up"),
+  ISET (GridStyle, 0, "grid-style", "Visible grid style"),
 
 /* %start-doc options "2 General GUI Options"
 @ftable @code
